@@ -1,5 +1,5 @@
-export const getPokemons = async () => {
-    const req = await fetch("https://pokeapi.co/api/v2/pokemon?limit=30")
+export const getPokemons = async (offset: number, limit: number) => {
+    const req = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
     const res = await req.json()
 
     const promises = res.results.map(async (pokemon: any) => {
