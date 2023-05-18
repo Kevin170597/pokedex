@@ -1,4 +1,4 @@
-import { Pokemon } from "../../models/pokemon.model"
+import { Pokemon } from "../../models"
 import { Card, Head, Name, Body, Data, Image} from "./PokeCard.styles"
 
 interface Props {

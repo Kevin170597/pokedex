@@ -24,27 +24,6 @@ export interface Type {
     type: TypeData;
 }
 
-interface RootObject {
-  normal: string;
-  fire: string;
-  water: string;
-  grass: string;
-  electric: string;
-  ice: string;
-  fighting: string;
-  poison: string;
-  ground: string;
-  flying: string;
-  psychic: string;
-  bug: string;
-  rock: string;
-  ghost: string;
-  dark: string;
-  dragon: string;
-  steel: string;
-  fairy: string;
-}
-
 export interface TypeData {
     name: "normal" | "fire" | "water" | "grass" | "electric" | "ice" | "fighting" | "poison" | "ground" | "flying" | "psychic" | "bug" | "rock" | "ghost" | "dark" | "dragon" | "steel" | "fairy",
     url: string
