@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react"
+import { PokeContainer } from "./AppStyles"
+import { PokeCard } from "./components/PokeCard/PokeCard"
+import { usePokemonStore } from "./store/usePokemon.store"
+import { getPokemons } from "./services/Pokemon.service"
 
 function App() {
+  const setPokemonsStore = usePokemonStore((state) => state.setPokemonsStore)
+  const pokemonsStore = usePokemonStore((state) => state.pokemons)
+
+  const handleGetPokemons = async () => {
+    const pokemons = await getPokemons()
+    setPokemonsStore(pokemons)
+  }
+
+  useEffect(() => {
+    handleGetPokemons()
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PokeContainer>
+        {pokemonsStore && pokemonsStore.map((pokemon) =>
+          <PokeCard key={pokemon.id} pokemon={pokemon} />
+        )}
+      </PokeContainer>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
