@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { Pokemon } from "../models/pokemon.model"
+import { Pokemon } from "../models"
 
 interface PokemonStore {
     pokemons: Pokemon[],
