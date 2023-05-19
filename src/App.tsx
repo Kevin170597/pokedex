@@ -5,7 +5,6 @@ import { usePokemonStore } from "./store"
 import { getPokemons } from "./services"
 
 function App() {
-  const setPokemonsStore = usePokemonStore((state) => state.setPokemonsStore)
   const pokemonsStore = usePokemonStore((state) => state.pokemons)
 
   const [pagination, setPagination] = useState<{ offset: number, limit: number }>({
@@ -13,14 +12,9 @@ function App() {
     limit: 31
   })
 
-  const handleGetPokemons = async () => {
-    const pokemons = await getPokemons(pagination.offset, pagination.limit)
-    setPokemonsStore([...pokemonsStore, ...pokemons])
-  }
-
   const loadMorePokemons = async () => {
     if (pokemonsStore.length >= 151) return
-    setPagination({ ...pagination, limit: 30, offset: pokemonsStore.length })
+    setPagination({ ...pagination, limit: 30, offset: pokemonsStore[pokemonsStore.length -1].id })
   }
 
   const PokemonListRef = useRef<HTMLDivElement>(null)
@@ -35,7 +29,7 @@ function App() {
   }
 
   useEffect(() => {
-    handleGetPokemons()
+    getPokemons(pagination.offset, pagination.limit)
   }, [pagination])
 
   return (
