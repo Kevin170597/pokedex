@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Pokemon } from "../../models"
 import { Checkbox } from "../Checkbox/Checkbox"
-import { Card, Head, Name, Body, Data, Image } from "./PokeCard.styles"
+import { Card, Head, Name, Body, Data, PokeType, Weight, Ability, AbilityTitle, Image } from "./PokeCard.styles"
 import { usePokemonStore } from "../../store"
 import { colors } from "./bgColor"
 
@@ -43,9 +43,10 @@ export const PokeCard = ({ pokemon }: Props) => {
             </Head>
             <Body>
                 <Data>
-                    <p>{pokemon.types[0].type.name}</p>
-                    <p>{pokemon.weight}</p>
-                    <p>abilitie</p>
+                    <PokeType>{pokemon.types[0].type.name}</PokeType>
+                    <Weight>{pokemon.weight / 10}kg</Weight>
+                    <AbilityTitle>Ability:</AbilityTitle>
+                    <Ability>{pokemon.abilities[0].ability.name}</Ability>
                 </Data>
                 <Image src={pokemon.sprites.front_default} alt="" />
             </Body>
