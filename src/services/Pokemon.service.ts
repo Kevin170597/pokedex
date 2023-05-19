@@ -16,6 +16,13 @@ export const getPokemons = async (offset: number, limit: number) => {
     usePokemonStore.setState({ pokemons: [...prevState, ...pokemons ] })
 }
 
+export const searchPokemon = async (name: string) => {
+    const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    const res = await req.json()
+    console.log(res)
+    usePokemonStore.setState({ pokemons: [res] })
+}
+
 export const deletePokemons = () => {
     const pokemons = usePokemonStore.getState().pokemons
     const toDelete = usePokemonStore.getState().idsToDelete

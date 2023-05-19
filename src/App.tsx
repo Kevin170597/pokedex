@@ -14,7 +14,9 @@ function App() {
 
   const loadMorePokemons = async () => {
     if (pokemonsStore.length >= 151) return
-    setPagination({ ...pagination, limit: 30, offset: pokemonsStore[pokemonsStore.length -1].id })
+    if (pokemonsStore.length >= 31) {
+      setPagination({ ...pagination, limit: 30, offset: pokemonsStore[pokemonsStore.length - 1].id })
+    }
   }
 
   const PokemonListRef = useRef<HTMLDivElement>(null)
