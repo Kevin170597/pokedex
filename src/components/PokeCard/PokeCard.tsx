@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { Pokemon } from "../../models"
-import { Card, Head, Name, Body, Data, Image} from "./PokeCard.styles"
+import { Checkbox } from "../Checkbox/Checkbox"
+import { Card, Head, Name, Body, Data, Image } from "./PokeCard.styles"
 import { usePokemonStore } from "../../store"
+import { colors } from "./bgColor"
 
 interface Props {
     pokemon: Pokemon
@@ -12,47 +14,31 @@ export const PokeCard = ({ pokemon }: Props) => {
     const unSetIdsToDelete = usePokemonStore((state) => state.unSetIdsToDelete)
 
     const [selected, setSelected] = useState<boolean>(false)
+    const [hover, setHover] = useState<boolean>(false)
 
-    const select = () => {
-        setSelected(!selected)
-        console.log(pokemon.id)
-        setIdsToDelete(pokemon.id)
-    }
-
-    const unSelect = () => {
-        setSelected(!select)
-        console.log(pokemon.id)
-        unSetIdsToDelete(pokemon.id)
-    }
-
-    const colors = {
-        normal: '#bcad9a',
-        fire: '#c7715c',
-        water: '#46b6ca',
-        grass: '#46cc79',
-        electric: '#ccb637',
-        ice: '#51b0bd',
-        fighting: '#943232',
-        poison: '#7036b3',
-        ground: '#b88644',
-        flying: '#895fb9',
-        psychic: '#d596b9',
-        bug: '#678643',
-        rock: '#975a32',
-        ghost: '#501692',
-        dark: '#4d2c19',
-        dragon: '#7384fd',
-        steel: '#636161',
-        fairy: '#f07f7f'
+    const handleCheckbox = () => {
+        if (selected) {
+            setSelected(false)
+            unSetIdsToDelete(pokemon.id)
+        } else {
+            setSelected(true)
+            setIdsToDelete(pokemon.id)
+        }
     }
 
     return (
-        <Card background={colors[pokemon.types[0].type.name]}>
+        <Card
+            background={colors[pokemon.types[0].type.name]}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+        >
             <Head>
                 <Name>#{pokemon.id} {pokemon.name}</Name>
-                <button onClick={() => select()}>y</button>
-                {selected && 
-                    <button onClick={() => unSelect()}>selected</button>
+                {hover || selected ? (
+                    <Checkbox checked={selected} handleCheckbox={handleCheckbox} />
+                ) : (
+                    null
+                )
                 }
             </Head>
             <Body>

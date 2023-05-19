@@ -8,6 +8,7 @@ export const Card = styled.div<{background: string}>`
 
 export const Head = styled.div`
     display: flex;
+    justify-content: space-between;
 `
 
 export const Name = styled.h3`
