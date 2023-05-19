@@ -24,11 +24,11 @@ export const usePokemonStore = create<PokemonStore>((set, get) => ({
         }))
     },
     unSetIdsToDelete: (id: number) => {
-        const idsToDelete = get().idsToDelete
-        const index = idsToDelete.indexOf(id)
-        if (index > -1) idsToDelete.splice(index, 1)
+        const ids = get().idsToDelete
+        const index = ids.indexOf(id)
+        if (index > -1) ids.splice(index, 1)
         set(() => ({
-            idsToDelete
+            idsToDelete: [...ids]
         }))
     }
 }))

@@ -29,4 +29,5 @@ export const deletePokemons = () => {
     }
 
     usePokemonStore.setState({ pokemons: filteredPokemons })
+    usePokemonStore.setState({ idsToDelete: [] })
 }

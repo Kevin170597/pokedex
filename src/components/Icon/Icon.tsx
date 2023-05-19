@@ -1,7 +1,7 @@
 import { icons } from "./icons"
 
 interface Props {
-    name: "checkboxUnchecked" | "checkboxChecked",
+    name: "checkboxUnchecked" | "checkboxChecked" | "delete",
     color?: string
 }
 
