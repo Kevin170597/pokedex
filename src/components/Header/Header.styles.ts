@@ -7,7 +7,7 @@ export const Head = styled.header`
     box-sizing: border-box;
     align-items: center;
     justify-content: space-between;
-    padding: 0 80px;
+    padding: 0 40px;
 `
 
 export const Logo = styled.img`
