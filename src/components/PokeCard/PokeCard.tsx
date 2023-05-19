@@ -1,11 +1,29 @@
+import { useState } from "react"
 import { Pokemon } from "../../models"
 import { Card, Head, Name, Body, Data, Image} from "./PokeCard.styles"
+import { usePokemonStore } from "../../store"
 
 interface Props {
     pokemon: Pokemon
 }
 
 export const PokeCard = ({ pokemon }: Props) => {
+    const setIdsToDelete = usePokemonStore((state) => state.setIdsToDelete)
+    const unSetIdsToDelete = usePokemonStore((state) => state.unSetIdsToDelete)
+
+    const [selected, setSelected] = useState<boolean>(false)
+
+    const select = () => {
+        setSelected(!selected)
+        console.log(pokemon.id)
+        setIdsToDelete(pokemon.id)
+    }
+
+    const unSelect = () => {
+        setSelected(!select)
+        console.log(pokemon.id)
+        unSetIdsToDelete(pokemon.id)
+    }
 
     const colors = {
         normal: '#bcad9a',
@@ -18,12 +36,12 @@ export const PokeCard = ({ pokemon }: Props) => {
         poison: '#7036b3',
         ground: '#b88644',
         flying: '#895fb9',
-        psychic: '#be7373',
+        psychic: '#d596b9',
         bug: '#678643',
         rock: '#975a32',
         ghost: '#501692',
         dark: '#4d2c19',
-        dragon: '#2a37b3',
+        dragon: '#7384fd',
         steel: '#636161',
         fairy: '#f07f7f'
     }
@@ -32,9 +50,14 @@ export const PokeCard = ({ pokemon }: Props) => {
         <Card background={colors[pokemon.types[0].type.name]}>
             <Head>
                 <Name>#{pokemon.id} {pokemon.name}</Name>
+                <button onClick={() => select()}>y</button>
+                {selected && 
+                    <button onClick={() => unSelect()}>selected</button>
+                }
             </Head>
             <Body>
                 <Data>
+                    <p>{pokemon.types[0].type.name}</p>
                     <p>{pokemon.weight}</p>
                     <p>abilitie</p>
                 </Data>
